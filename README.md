@@ -8,11 +8,13 @@ and the number of breaches of a password and displays it on the console.
 
 ## Requirements
 To run these applications successfully, you will need
+
     - .NET Framework (preferrably 5.0)
     - Make (optional)
 
 ## Installation
 If you have Make installed, run the following commands from the project's root.
+
     - `make`
     - `make run-backend`
     - `make run-frontend`
