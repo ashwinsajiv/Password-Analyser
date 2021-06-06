@@ -44,17 +44,17 @@
         }
       }
     },
-    "components": { 
-        "schemas": {
-            "type": "object",
-            "properties": {
-                "Strength": {
-                    "type": "string"
-                },
-                "Breach": {
-                    "type": "int"
-                }
-            }
-        }
-    }
+  "components": { 
+      "schemas": {
+          "type": "object",
+          "properties": {
+              "Strength": {
+                  "type": "string"
+              },
+              "Breach": {
+                  "type": "int"
+              }
+          }
+      }
   }
+}
