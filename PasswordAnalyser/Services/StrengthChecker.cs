@@ -22,7 +22,7 @@ namespace PasswordAnalyser.Services
         public string FindStrength()
         {
             int score = 0;
-            if (_password.Length < 1)
+            if (string.IsNullOrWhiteSpace(_password))
                 return passwordScore.Blank.ToString();
             if (_password.Length <= 6)
                 return passwordScore.Unacceptable.ToString();

@@ -1,4 +1,4 @@
-all: clean restore build
+all: clean restore build test
 
 clean:
 	cd PasswordAnalyser && dotnet clean
@@ -11,6 +11,9 @@ restore:
 build: 
 	cd PasswordAnalyser && dotnet build
 	cd PasswordAnalyserConsole && dotnet build
+	
+test:
+	cd PasswordAnalyser && dotnet test
 
 run-backend:
 	cd PasswordAnalyser && dotnet run

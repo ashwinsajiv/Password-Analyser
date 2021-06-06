@@ -15,10 +15,7 @@ namespace PasswordAnalyserConsole
                 string password = SecuredRead(enterPassword);
                 Console.ReadKey();
                 PasswordAnalyser pwa = new PasswordAnalyser(password);
-                if (!string.IsNullOrWhiteSpace(password))
-                {
-                    Console.WriteLine("Your password strength is " + pwa.Strength + " and it has been breached " + pwa.Breach + " times.");
-                }
+                Console.WriteLine("Your password strength is " + pwa.Strength + " and it has been breached " + pwa.Breach + " times.");
                 Console.WriteLine("Do you want to check again? (y/Y)");
                 option = Console.ReadLine();
             } while (option == "y" || option == "Y");
@@ -49,8 +46,7 @@ namespace PasswordAnalyserConsole
                             if (string.IsNullOrWhiteSpace(password))
                             {
                                 Console.WriteLine("");
-                                Console.WriteLine("Password cannot be empty");
-                                Console.WriteLine("Press any key to continue");
+                                Console.WriteLine("Password cannot be empty, press any key to continue");
                                 break;
                             }
                             else
