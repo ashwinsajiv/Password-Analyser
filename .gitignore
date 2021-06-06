@@ -1,7 +1,5 @@
 .vscode
-PasswordAnalyser/obj/*
-PasswordAnalyserConsole/obj/*
-PasswordAnalyser/bin/*
-PasswordAnalyserConsole/bin/*
-PasswordAnalyser/.vscode
-PasswordAnalyserConsole/.vscode
+PasswordAnalyser/obj
+PasswordAnalyserConsole/obj
+PasswordAnalyser/bin
+PasswordAnalyserConsole/bin
