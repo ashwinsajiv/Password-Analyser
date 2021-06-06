@@ -25,7 +25,9 @@ namespace PasswordAnalyserConsole.Services
         }
         public async Task CheckStrength()
         {
-            var client = new HttpClient();
+            var httpClientHandler = new HttpClientHandler();
+            httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => { return true; };
+            var client = new HttpClient(httpClientHandler);
             client.BaseAddress = new Uri(PasswordAnalyserURL);
             HttpRequestMessage requestMessage = new HttpRequestMessage(new HttpMethod("POST"), "/Password");
             requestMessage.Content = new StringContent(JsonConvert.SerializeObject(_password), Encoding.UTF8, "application/json");
