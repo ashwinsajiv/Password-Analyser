@@ -1,4 +1,7 @@
 using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -6,8 +9,8 @@ namespace PasswordAnalyserConsole.Services
 {
     public class ResponseObject
     {
-        public string Strength { get; set; }
-        public int Breach { get; set; }
+        public string strength { get; set; }
+        public int breach { get; set; }
     }
     public class PasswordAnalyser
     {
@@ -19,21 +22,19 @@ namespace PasswordAnalyserConsole.Services
         public PasswordAnalyser(string password)
         {
             _password = password;
-            var result = CheckStrength();
-            Strength = result.Item1;
-            Breach = result.Item2;
         }
-        public (string, int) CheckStrength()
+        public async Task CheckStrength()
         {
-            var client = new RestClient(PasswordAnalyserURL);
-            client.Timeout = -1;
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("Content-Type", "application/json");
-            string body = "\"" + _password + "\"";
-            request.AddParameter("application/json", body, ParameterType.RequestBody);
-            IRestResponse response = client.Execute(request);
-            var res = JsonConvert.DeserializeObject<ResponseObject>(response.Content);
-            return (res.Strength, res.Breach);
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(PasswordAnalyserURL);
+            HttpRequestMessage requestMessage = new HttpRequestMessage(new HttpMethod("POST"), "/Password");
+            requestMessage.Content = new StringContent(JsonConvert.SerializeObject(_password), Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("/Password", requestMessage.Content);
+            response.EnsureSuccessStatusCode();
+            var contents = await response.Content.ReadAsStringAsync();
+            ResponseObject res = JsonConvert.DeserializeObject<ResponseObject>(contents);
+            this.Strength = res.strength;
+            this.Breach = res.breach;
         }
     }
 }

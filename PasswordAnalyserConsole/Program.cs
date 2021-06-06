@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Threading.Tasks;
 using PasswordAnalyserConsole.Services;
 
 namespace PasswordAnalyserConsole
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             var option = "n";
             do
@@ -15,6 +16,7 @@ namespace PasswordAnalyserConsole
                 string password = SecuredRead(enterPassword);
                 Console.ReadKey();
                 PasswordAnalyser pwa = new PasswordAnalyser(password);
+                await pwa.CheckStrength();
                 Console.WriteLine("Your password strength is " + pwa.Strength + " and it has been breached " + pwa.Breach + " times.");
                 Console.WriteLine("Do you want to check again? (y/Y)");
                 option = Console.ReadLine();
