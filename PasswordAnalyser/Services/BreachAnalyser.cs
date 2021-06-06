@@ -31,12 +31,12 @@ namespace PasswordAnalyser.Services
             var sha = getSHA();
             var prefix = sha.Substring(0, 5);
             var suffix = sha.Substring(5, sha.Length - 5);
-
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(HaveIBeenPwnedURL + prefix);
             request.Method = "GET";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream receiveStream = response.GetResponseStream();
             StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8);
+            // No need to check for 200 as this service returns 200 only
             var hashes = readStream.ReadToEnd().ToString();
             var hashList = hashes.Split('\n');
             for (int i = 0; i < hashList.Length; i++)

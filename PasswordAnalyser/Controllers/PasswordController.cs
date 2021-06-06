@@ -19,8 +19,10 @@ namespace PasswordAnalyser.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] string password)
         {
+            _logger.Log(LogLevel.Information, "POST /Password called");
             Password pw = new Password(password);
             PasswordAnalyserResponse res = new PasswordAnalyserResponse(pw.Strength, pw.Breach);
+            _logger.Log(LogLevel.Information, "GET api.pwnedpasswords.com/range/ called");
             if (pw.Breach > 0)
             {
                 res.Strength = "Unacceptable";
